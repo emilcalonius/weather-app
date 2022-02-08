@@ -1,30 +1,12 @@
-body, html {
-  width: 100%;
+html {
   height: 100%;
-  margin: 0;
-}
-
-#root {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(36, 36, 36);
+  background-image: linear-gradient(to right, rgb(54, 24, 88), rgb(43, 0, 100));
 }
 
 .weatherStats {
-  background-color: rgb(88, 202, 255);
-  width: 500px;
-  height: 75%;
-  border-radius: 25px;
-}
-
-h1 {
-  padding-left: 10px;
-}
-
-p {
-  padding-left: 10px;
-  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
