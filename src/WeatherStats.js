@@ -4,10 +4,10 @@ Fetch and display weather statistics
 
 */
 
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 function WeatherStats() {
-  const [data, setData] = React.useState({
+  const [data, setData] = useState({
     date: "",
     temperature: null,
     windSpeed: null,
@@ -16,7 +16,7 @@ function WeatherStats() {
     city: ""
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Change the date format to finnish standard
     const formatDate = (date) => {
       let day = date.split("T")[0].split("-");

@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
+import Navigation from './Navigation';
 import WeatherStats from './WeatherStats';
 
 function App() {
   return (
-    <WeatherStats />
+    <div>
+      <Navigation />
+      <WeatherStats />
+    </div>
   );
 }
 
