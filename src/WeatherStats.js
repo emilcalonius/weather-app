@@ -47,11 +47,16 @@ function WeatherStats() {
     const getCity = async (location) => {
     fetch(`https://eu1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&lat=${location.coords.latitude}&lon=${location.coords.longitude}&format=json`)
       .then((res) => res.text())
-      .then((res) => fetchWeatherData(JSON.parse(res).address.city));
+      .then((res) => fetchWeatherData(JSON.parse(res).address.city))
+    }
+
+    // If users location is not available, fetch weather from Helsinki by default
+    const fetchDefault = async () => {
+      fetchWeatherData("Helsinki");
     }
 
     // Get users location
-    navigator.geolocation.getCurrentPosition(getCity);
+    navigator.geolocation.getCurrentPosition(getCity, fetchDefault);
   }, []);
 
   return (
