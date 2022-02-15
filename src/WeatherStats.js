@@ -4,6 +4,8 @@ Fetch and display weather statistics
 
 */
 
+import { IconButton, Snackbar, SnackbarContent } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useEffect, useState } from 'react';
 
 function WeatherStats(props) {
@@ -15,6 +17,11 @@ function WeatherStats(props) {
     cloudiness: "",
     city: ""
   });
+  const [ snackbarOpen, setSnackbarOpen ] = useState(false);
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   useEffect(() => {
     // Change the date format to finnish standard
@@ -41,17 +48,43 @@ function WeatherStats(props) {
             city: city
             });
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          // Give an error message for users if there was an error fetching weather data
+          setSnackbarOpen(true);
+        });
     }
     console.log(props.city);
     fetchWeatherData(props.city);
   }, [props.city]);
 
   return (
-    <div className='weatherStats'>
-      <h1>{data.city}</h1>
-      <p>{data.date}</p>
-      <h1>{data.temperature} °C</h1>
+    <div>
+      <div className='weatherStats'>
+        <h1>{data.city}</h1>
+        <p>{data.date}</p>
+        <h1>{data.temperature} °C</h1>
+      </div>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={60000}
+        onClose={handleSnackbarClose}
+      >
+        <SnackbarContent
+          style={{backgroundColor: "#ed7a72", color: "black"}}
+          message={`Error getting weather data from ${props.city}!`}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }
+        />
+      </Snackbar>
     </div>
   );
 }

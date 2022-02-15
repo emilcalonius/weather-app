@@ -1,6 +1,6 @@
 /*
 
-Top navigation on large screens and menu drawerOpening from the side on mobile.
+Top navigation on large screens and drawer on mobile.
 
 */
 
@@ -38,6 +38,8 @@ function Navigation(props) {
   };
 
   useEffect(() => {
+    // Read the list of finnish cities from a file
+    // and add the cities to an array
     fetch(list)
       .then((res) => res.text())
       .then((res) => setCities(res.split("\n")));
@@ -55,6 +57,16 @@ function Navigation(props) {
               open={menuOpen}
               onClose={handleMenuClose}
             >
+              <Box key="snackbar">
+                <MenuItem
+                  onClick={() => {
+                    props.updateCity("city");
+                    handleMenuClose();
+                  }}
+                >
+                  snackbar test
+                </MenuItem>
+              </Box>
               {
                 cities.map(city => {
                   return(
@@ -92,6 +104,18 @@ function Navigation(props) {
             <Dialog onClose={toggleDialog} open={dialogOpen}>
               <List>
                 <Box>
+                  <Box key="snackbar">
+                    <Button
+                      fullWidth={true}
+                      onClick={() => {
+                        props.updateCity("city");
+                        toggleDialog();
+                        toggleDrawer();
+                      }}
+                    >
+                      snackbar test
+                    </Button>
+                  </Box>
                   {
                     cities.map(city => {
                       return(
