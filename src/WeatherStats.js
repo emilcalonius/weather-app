@@ -6,7 +6,7 @@ Fetch and display weather statistics
 
 import { useEffect, useState } from 'react';
 
-function WeatherStats() {
+function WeatherStats(props) {
   const [data, setData] = useState({
     date: "",
     temperature: null,
@@ -26,6 +26,7 @@ function WeatherStats() {
 
     // Get weather information from Ilmatieteenlaitos API
     const fetchWeatherData = async (city) => {
+      // if (city === null) return;
       fetch(`https://opendata.fmi.fi/wfs/fin?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=${city}&`)
         .then((res) => res.text())
         .then((res) => {
@@ -42,22 +43,9 @@ function WeatherStats() {
         })
         .catch((err) => console.error(err));
     }
-
-    // Get the city based on user coordinates from locationIQ API
-    const getCity = async (location) => {
-    fetch(`https://eu1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&lat=${location.coords.latitude}&lon=${location.coords.longitude}&format=json`)
-      .then((res) => res.text())
-      .then((res) => fetchWeatherData(JSON.parse(res).address.city))
-    }
-
-    // If users location is not available, fetch weather from Helsinki by default
-    const fetchDefault = async () => {
-      fetchWeatherData("Helsinki");
-    }
-
-    // Get users location
-    navigator.geolocation.getCurrentPosition(getCity, fetchDefault);
-  }, []);
+    console.log(props.city);
+    fetchWeatherData(props.city);
+  }, [props.city]);
 
   return (
     <div className='weatherStats'>
