@@ -13,6 +13,10 @@ import WeatherStats from './WeatherStats';
 function App() {
   const [city, setCity] = useState("Helsinki");
 
+  const updateCity = (newCity) => {
+    setCity(newCity);
+  };
+
   useLayoutEffect(() => {
     // Get the city based on user coordinates from locationIQ API
     const getCity = async (location) => {
@@ -23,12 +27,12 @@ function App() {
 
     // Get users location
     navigator.geolocation.getCurrentPosition(getCity);
-  }, [])
+  }, []);
 
   return (
     <div>
-      <Navigation/>
-      <WeatherStats city={city}/>
+      <Navigation updateCity={updateCity} />
+      <WeatherStats city={city} />
     </div>
   );
 }
