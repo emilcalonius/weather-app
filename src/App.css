@@ -22,3 +22,11 @@ html {
   cursor: pointer;
   font-size: 1em;
 }
+
+.MuiDrawer-paper {
+  background-color: rgb(43, 0, 100) !important;
+}
+
+.MuiDialog-paper {
+  background-color: rgb(43, 0, 100) !important;
+}

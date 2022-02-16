@@ -67,7 +67,7 @@ function WeatherStats(props) {
       </div>
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={60000}
+        autoHideDuration={6000}
         onClose={handleSnackbarClose}
       >
         <SnackbarContent

@@ -106,6 +106,7 @@ function Navigation(props) {
                 <Box>
                   <Box key="snackbar">
                     <Button
+                      style={{color: "blanchedalmond"}}
                       fullWidth={true}
                       onClick={() => {
                         props.updateCity("city");
@@ -121,6 +122,7 @@ function Navigation(props) {
                       return(
                         <Box key={city}>
                           <Button
+                            style={{color: "blanchedalmond"}}
                             fullWidth={true}
                             onClick={() => {
                               props.updateCity(city);
