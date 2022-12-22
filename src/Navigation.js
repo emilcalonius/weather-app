@@ -51,7 +51,6 @@ function Navigation(props) {
         !isMobile ?
           <div>
             <button className="btn" onClick={openMenu}>Valitse kaupunki</button>
-            <button className="btn">Avaa kartta</button>
             <Menu
               anchorEl={anchorEl}
               open={menuOpen}
@@ -99,7 +98,6 @@ function Navigation(props) {
               onClose={toggleDrawer}
             >
               <button className="btn" onClick={toggleDialog}>Valitse kaupunki</button>
-              <button className="btn">Avaa kartta</button>
             </Drawer>
             <Dialog onClose={toggleDialog} open={dialogOpen}>
               <List>

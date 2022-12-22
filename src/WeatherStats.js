@@ -40,8 +40,6 @@ function WeatherStats(props) {
           const parser = new DOMParser();
           const xml = parser.parseFromString(res, "text/html");
           const results = xml.getElementsByTagName("om:result");
-          console.log(results[0]);
-          console.log(results[0].firstElementChild.lastElementChild.firstElementChild.lastElementChild.textContent);
           setData({
             temperature: Math.round(Number(results[0].firstElementChild.lastElementChild.firstElementChild.lastElementChild.textContent)),
             date: formatDate(results[0].firstElementChild.lastElementChild.firstElementChild.firstElementChild.textContent),
@@ -54,7 +52,6 @@ function WeatherStats(props) {
           setSnackbarOpen(true);
         });
     }
-    console.log(props.city);
     fetchWeatherData(props.city);
   }, [props.city]);
 
