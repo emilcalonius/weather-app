@@ -1,3 +1,6 @@
-http://weather-ec.herokuapp.com/
+# Weather Application
+An application for viewing weather information from finnish cities.
 
-TODO
+## Usage
+Test the application here:
+https://weather-app-ec.onrender.com/
