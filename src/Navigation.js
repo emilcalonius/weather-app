@@ -18,6 +18,7 @@ function Navigation(props) {
   const [ dialogOpen, setDialogOpen ] = useState(false);
   const [ anchorEl, setAnchorEl ] = useState(null);
   const [ cities, setCities ] = useState([]);
+  const [ cityList, setCityList ] = useState([]);
   const isMobile = useMediaQuery({query: "(max-width:600px)"});
   const menuOpen = Boolean(anchorEl);
 
@@ -34,15 +35,25 @@ function Navigation(props) {
   };
 
   const handleMenuClose = () => {
+    setCityList(cities);
     setAnchorEl(null);
   };
+
+  const updateList = (event) => {
+    const filteredCities = cities.filter(cityName => cityName.toLowerCase().includes(event.target.value.toLowerCase()));
+    setCityList(filteredCities);
+  }
 
   useEffect(() => {
     // Read the list of finnish cities from a file
     // and add the cities to an array
     fetch(list)
       .then((res) => res.text())
-      .then((res) => setCities(res.split("\n")));
+      .then((res) => {
+        const cities = res.split("\n");
+        setCities(cities);
+        setCityList(cities);
+      });
   }, []);
 
   return(
@@ -56,7 +67,8 @@ function Navigation(props) {
               open={menuOpen}
               onClose={handleMenuClose}
             >
-              <Box key="snackbar">
+              <input placeholder="Type city name" onChange={updateList}></input>
+              {/* <Box key="snackbar">
                 <MenuItem
                   onClick={() => {
                     props.updateCity("city");
@@ -65,9 +77,9 @@ function Navigation(props) {
                 >
                   snackbar test
                 </MenuItem>
-              </Box>
+              </Box> */}
               {
-                cities.map(city => {
+                cityList.map(city => {
                   return(
                     <Box key={city}>
                       <MenuItem
