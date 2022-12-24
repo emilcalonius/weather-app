@@ -26,23 +26,7 @@ function WeatherStats(props) {
   useEffect(() => {
     // Get weather information from Ilmatieteenlaitos API
     const fetchWeatherData = (city) => {
-      // if (city === null) return;
-      let endtime = new Date(new Date());
-      endtime = endtime.toISOString();
-      console.log(endtime)
-      let temp = endtime.split("");
-      temp.splice(endtime.length - 5, 4);
-      endtime = temp.join("");
-      console.log(endtime)
-
-      let starttime = new Date(new Date() - 60 * 60000);
-      starttime = starttime.toISOString();
-      console.log(starttime)
-      temp = starttime.split("");
-      temp.splice(starttime.length - 5, 4);
-      starttime = temp.join("");
-      console.log(starttime)
-      fetch(`https://opendata.fmi.fi/wfs/fin?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=${city}&starttime=${starttime}&endtime=${endtime}`)
+      fetch(`https://opendata.fmi.fi/wfs/fin?service=WFS&version=2.0.0&request=GetFeature&storedquery_id=fmi::observations::weather::timevaluepair&place=${city}&timezone=Europe/Helsinki`)
         .then((res) => res.text())
         .then((res) => {
           const parser = new DOMParser();
