@@ -27,6 +27,7 @@ function Navigation(props) {
   };
 
   const toggleDialog = () => {
+    setCityList(cities);
     setDialogOpen(!dialogOpen);
   };
 
@@ -67,7 +68,7 @@ function Navigation(props) {
               open={menuOpen}
               onClose={handleMenuClose}
             >
-              <input placeholder="Type city name" onChange={updateList}></input>
+              <input placeholder="Search for city..." onChange={updateList} />
               {/* <Box key="snackbar">
                 <MenuItem
                   onClick={() => {
@@ -127,8 +128,9 @@ function Navigation(props) {
                       snackbar test
                     </Button>
                   </Box>
+                  <input placeholder="Search for city..." onChange={updateList} />
                   {
-                    cities.map(city => {
+                    cityList.map(city => {
                       return(
                         <Box key={city}>
                           <Button
